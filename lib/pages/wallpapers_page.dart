@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:pixora/pages/wallpaper_details_page.dart'
+    show FullWallpaperPreview;
 
 class WallpapersPage extends StatelessWidget {
   final String topic;
@@ -7,9 +10,6 @@ class WallpapersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final theme = Theme.of(context);
-
-    // Replace with your actual wallpaper data source
     final List<String> wallpapers = List.generate(
       12,
       (index) =>
@@ -27,16 +27,30 @@ class WallpapersPage extends StatelessWidget {
           crossAxisSpacing: 10,
         ),
         itemBuilder: (context, index) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              wallpapers[index],
-              fit: BoxFit.cover,
-              loadingBuilder:
-                  (context, child, loadingProgress) =>
-                      loadingProgress == null
-                          ? child
-                          : const Center(child: CircularProgressIndicator()),
+          final imageUrl = wallpapers[index];
+          final heroTag = '$imageUrl-$index'; // Ensure uniqueness
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => FullWallpaperPreview(imageUrl: imageUrl),
+                ),
+              );
+            },
+            child: Hero(
+              tag: heroTag,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: BoxFit.cover,
+                  placeholder:
+                      (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
+              ),
             ),
           );
         },
