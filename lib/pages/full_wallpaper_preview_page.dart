@@ -94,6 +94,7 @@ class FullWallpaperPreview extends StatelessWidget {
               width: double.infinity,
               child: FilledButton.icon(
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF1084E3),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),

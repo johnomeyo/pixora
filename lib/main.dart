@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pixora/pages/homepage.dart';
+import 'package:pixora/providers/wallpaper_provider.dart'
+    show WallpaperProvider;
+import 'package:provider/provider.dart'
+    show ChangeNotifierProvider, MultiProvider;
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => WallpaperProvider())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,9 +25,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       darkTheme: ThemeData.dark(),
-      // lightTheme: ThemeData.light(),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF06A125)),
+        useMaterial3: true,
       ),
       home: Homepage(),
     );
