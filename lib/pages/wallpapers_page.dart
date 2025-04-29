@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:pixora/pages/wallpaper_details_page.dart'
+import 'package:pixora/pages/full_wallpaper_preview_page.dart'
     show FullWallpaperPreview;
 
 class WallpapersPage extends StatelessWidget {
@@ -45,9 +45,12 @@ class WallpapersPage extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: imageUrl,
                   fit: BoxFit.cover,
-                  placeholder:
-                      (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
+                  placeholder: (context, url) => const Center(
+                  child: AnimatedSwitcher(
+                    duration: Duration(seconds: 1),
+                    child: Icon(Icons.image, size: 50, color: Colors.grey),
+                  ),
+                ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),

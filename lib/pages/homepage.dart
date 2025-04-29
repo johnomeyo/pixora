@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pixora/models/topic_model.dart' show Topic;
 import 'package:pixora/pages/wallpapers_page.dart' show WallpapersPage;
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Homepage extends StatelessWidget {
   final List<Topic> topics = [
@@ -87,13 +88,13 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text("Welcome to Pinterest")),
+      appBar: AppBar(title: Text("Welcome to Pixora")),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Pick 5 or more topics", style: theme.textTheme.titleMedium),
+            Text("Explore curated wallpapers just for you.", style: theme.textTheme.titleMedium),
             const SizedBox(height: 12),
             Expanded(
               child: GridView.builder(
@@ -119,7 +120,7 @@ class Homepage extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(topic.imageUrl),
+                          image: CachedNetworkImageProvider(topic.imageUrl),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.circular(12),

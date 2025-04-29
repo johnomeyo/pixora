@@ -31,7 +31,9 @@ class FullWallpaperPreview extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Center(child: Text('Previews', style: theme.textTheme.titleMedium)),
+                Center(
+                  child: Text('Previews', style: theme.textTheme.titleMedium),
+                ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
@@ -39,8 +41,10 @@ class FullWallpaperPreview extends StatelessWidget {
                     Expanded(
                       child: Column(
                         children: [
-                          Text('Lock Screen',
-                              style: theme.textTheme.bodyMedium),
+                          Text(
+                            'Lock Screen',
+                            style: theme.textTheme.bodyMedium,
+                          ),
                           const SizedBox(height: 8),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(16),
@@ -60,8 +64,10 @@ class FullWallpaperPreview extends StatelessWidget {
                     Expanded(
                       child: Column(
                         children: [
-                          Text('Home Screen',
-                              style: theme.textTheme.bodyMedium),
+                          Text(
+                            'Home Screen',
+                            style: theme.textTheme.bodyMedium,
+                          ),
                           const SizedBox(height: 8),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(16),
@@ -84,20 +90,23 @@ class FullWallpaperPreview extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+            child: SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
+                icon: const Icon(Icons.wallpaper),
+                label: const Text("Set as Wallpaper"),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Set wallpaper tapped")),
+                  );
+                },
               ),
-              icon: const Icon(Icons.wallpaper),
-              label: const Text("Set as Wallpaper"),
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Set wallpaper tapped")),
-                );
-              },
             ),
           ),
           const SizedBox(height: 20),
