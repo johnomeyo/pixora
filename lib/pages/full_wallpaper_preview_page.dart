@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:pixora/utils/wallpaper_utils.dart';
 
 class FullWallpaperPreview extends StatelessWidget {
   final String imageUrl;
@@ -102,10 +103,9 @@ class FullWallpaperPreview extends StatelessWidget {
                 ),
                 icon: const Icon(Icons.wallpaper),
                 label: const Text("Set as Wallpaper"),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Set wallpaper tapped")),
-                  );
+                onPressed: () async {
+                  //implement wallpaper setting logic
+                  await setWallpaper(context, imageUrl);
                 },
               ),
             ),
